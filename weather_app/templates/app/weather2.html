@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+/* Add the following style to prevent scrolling on the entire page */
+html, body {
+    overflow: hidden;
+    height: 100%;
+}
+        .forecast-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: rgb(108, 207, 246);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 600px; /* Set a fixed height */
+    overflow: hidden; /* Hide the overflow content */
+        }
+
+        .day {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .horizontal-days {
+            display: flex;
+            justify-content: space-between;
+        }
+/* Add the following style to allow scrolling within the forecast container */
+.forecast-container .horizontal-days {
+    overflow-x: auto;
+    white-space: nowrap;
+    
+}
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .temperature {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .condition {
+            color: #444;
+        }
+        /* .date-time {
+            font-size: 14px;
+            color: #888;
+        } */
+
+
+        .container{
+    padding: 20px 70px;
+    color:black;
+}
+
+.current-info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.date-container{
+    /* font-weight: 100; */
+    text-align: right; /* Align the text to the right */
+    flex-grow: 1; /* Allow the date-container to grow and take up the remaining space */
+}
+.date-container .time{
+    font-size: 25px;
+    margin-right: 20px; /* Add some right margin for spacing */
+}
+
+.date-container #am-pm{
+    font-size: 25px;
+    margin-left: 20px;
+}
+
+.date-container .date{
+    font-size: 25px;
+    
+}
+
+.place-container{
+    text-align: end;
+}
+
+.place-container .time-zone{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.place-container .country{
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.current-info .others{
+    display: flex;
+    flex-direction: column;
+    background: rgba(24,24,27, 0.6);
+    padding:20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+}
+
+.current-info .others .weather-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-icon {
+        display: block;
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+    </style>
+</head>
+<body>
+    <div class="forecast-container">
+        <div class="container">
+            <div class="current-info">
+                <div class="place-container">
+                    <!-- Add a search bar for city -->
+                    <input type="text" id="cityInput" placeholder="Enter City Name">
+                    <button onclick="updateWeatherByCity()">Search</button>
+                </div>
+                <div class="date-container">
+                    <div class="time" id="time">
+                        <span id="am-pm"></span>
+                    </div>
+                    <div class="date" id="date"></div>
+                </div>
+            </div>
+        </div>
+        <div id="top-day" style="text-align: center;">
+            <!-- Updated dynamically using JavaScript -->
+        </div>
+        <div class="horizontal-days" id="horizontal-days-container">
+            <!-- Updated dynamically using JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const timeEl = document.getElementById('time');
+        const dateEl = document.getElementById('date');
+        const currentWeatherItemsEl = document.getElementById('current-weather-items');
+        const timezone = document.getElementById('time-zone');
+        const countryEl = document.getElementById('country');
+        const weatherForecastEl = document.getElementById('weather-forecast');
+        const currentTempEl = document.getElementById('current-temp');
+
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const API_KEY ='49cc8c821cd2aff9af04c9f98c36eb74';
+
+        setInterval(() => {
+            const time = new Date();
+            const month = time.getMonth();
+            const date = time.getDate();
+            const day = time.getDay();
+            const hour = time.getHours();
+            const hoursIn12HrFormat = hour >= 13 ? hour %12: hour;
+            const minutes = time.getMinutes();
+            const ampm = hour >=12 ? 'PM' : 'AM';
+
+            timeEl.innerHTML = (hoursIn12HrFormat < 10? '0'+hoursIn12HrFormat : hoursIn12HrFormat) + ':' + (minutes < 10? '0'+minutes: minutes)+ ' ' + `<span id="am-pm">${ampm}</span>`;
+
+            dateEl.innerHTML = days[day] + ' ' + date+ ' ' + months[month];
+
+        }, 1000);
+
+        const apiKey = "49cc8c821cd2aff9af04c9f98c36eb74"; // Replace with your actual OpenWeatherMap API key
+        const baseUrl = "https://api.openweathermap.org/data/2.5/forecast";
+        let city = "Warangal";   //Replace city
+        const topDayElement = document.getElementById('top-day');
+        const horizontalDaysContainer = document.getElementById('horizontal-days-container');
+        const cityInput = document.getElementById('cityInput');
+
+        function getWeatherData() {
+            const endpoint = `${baseUrl}?q=${city}&appid=${apiKey}&units=metric`;
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => updateWeather(data));
+        }
+
+        function updateWeather(data) {
+            const currentDayIndex = new Date().getDay();
+            const temperature = data.list[currentDayIndex].main.temp;
+            const condition = data.list[currentDayIndex].weather[0].description;
+            const iconCode = data.list[currentDayIndex].weather[0].icon;
+
+            topDayElement.innerHTML = `
+                <div id="${days[currentDayIndex]}" class="day">
+                    <h2>${days[currentDayIndex]}</h2>
+                    <p class="temperature">${temperature}°C</p>
+                    <p class="condition">${condition}</p>
+                    <img class="weather-icon" src="http://openweathermap.org/img/w/${iconCode}.png"  alt="${condition}">
+                </div>
+            `;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
+
+            horizontalDaysContainer.innerHTML = '';
+            for (let i = 1; i <= 7; i++) {
+                const forecastDate = new Date(today);
+                forecastDate.setDate(today.getDate() + i);
+
+                const dayName = days[forecastDate.getDay()];
+                const dateString = forecastDate.toISOString().split('T')[0];
+
+                const forecastItem = data.list.find(item => item.dt_txt.includes(dateString));
+                if (forecastItem) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    dayElement.innerHTML = `
+                        <h2>${dayName}</h2>
+                        <!--<p class="date">${dateString}</p>-->
+                        <p class="temperature">${forecastItem.main.temp}°C</p>
+                        <p class="condition">${forecastItem.weather[0].description}</p>
+                        <img class="weather-icon" src="http://openweathermap.org/img/w/${forecastItem.weather[0].icon}.png" alt="${forecastItem.weather[0].description}">
+                    `;
+                    horizontalDaysContainer.appendChild(dayElement);
+                }
+            }
+        }
+
+        // Function to update weather based on user-entered city
+        function updateWeatherByCity() {
+            city = cityInput.value.trim();
+            getWeatherData();
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initial fetch and update
+            getWeatherData();
+
+            // Fetch and update every second (adjust as needed)
+            setInterval(getWeatherData, 1000);
+        });
+    </script>
+</body>
+</html>

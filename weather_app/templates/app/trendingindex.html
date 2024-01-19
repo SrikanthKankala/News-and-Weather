@@ -1,0 +1,664 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                // Replace the URL with your actual API endpoint for trending news
+                const response = await fetch('https://content.guardianapis.com/search?q=top%20headlines&api-key=b192d95a-26aa-4afd-8ac0-8c3c480b7cd7');
+                // const response = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=35eb856c9022423081ae24d00aa077bd');
+                
+                // const response = await fetch('https://newsapi.org/v2/top-headlines?' +'country=us&' +'apiKey=35eb856c9022423081ae24d00aa077bd');
+                
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.response.results.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3>${news.webTitle}</h3><p style="display:none;">${news.webTitle}</p>`;
+                    newsItem.addEventListener("click", () => redirectToDescriptionPage(news.webTitle));
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        const redirectToDescriptionPage = (description) => {
+            window.location.href = `trendingdescription.html?desc=${encodeURIComponent(description)}`;
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3>${news.title}</h3><p style="display:none;">${news.description}</p>`;
+                    newsItem.addEventListener("click", () => redirectToDescriptionPage(news.title));
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        const redirectToDescriptionPage = (description) => {
+            window.location.href = `trendingdescription.html?desc=${encodeURIComponent(description)}`;
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3>${news.title}</h3><p style="display:none;">${news.description}</p>`;
+                    newsItem.addEventListener("click", () => redirectToDescriptionPage(news.title, news.description));
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        const redirectToDescriptionPage = (title, description) => {
+            window.location.href = `trendingdescription.html?title=${encodeURIComponent(title)}&desc=${encodeURIComponent(description)}`;
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+<!-- don't delete
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3>${news.title}</h3><p style="display:none;">${news.description}</p>`;
+                    newsItem.addEventListener("click", () => redirectToDescriptionPage(news.title, news.description));
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        const redirectToDescriptionPage = (title, description) => {
+            // Save selected news details to localStorage
+            localStorage.setItem('selectedNewsTitle', title);
+            localStorage.setItem('selectedNewsDescription', description);
+
+            window.location.href = `trendingdescription.html`;
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3>${news.title}</h3><p style="display:none;">${news.description}</p><img src="${news.image}" alt="${news.title}"/>`;
+                    newsItem.addEventListener("click", () => redirectToDescriptionPage(news));
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        const redirectToDescriptionPage = (news) => {
+            // Store selected news in localStorage
+            localStorage.setItem('selectedNews', JSON.stringify(news));
+            window.location.href = 'trendingdescription.html';
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3><a href="${news.url}" target="_blank">${news.title}</a></h3><p style="display:none;">${news.description}</p>`;
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .news-container,
+        .profits-container {
+            margin-top: 20px;
+        }
+
+        .news-item,
+        .profit-item {
+            cursor: pointer; /* Add cursor pointer for clickable items */
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .news-item h3 a {
+            text-decoration: none; /* Remove underline from news heading */
+            color: #333; /* Set the color for the news heading */
+        }
+    </style>
+    <title>Today's Trending News</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Today's Trending</h2>
+        <div class="news-container" id="newsContainer"></div>
+    </div>
+
+    <script>
+        const newsContainer = document.getElementById("newsContainer");
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+
+        // Function to fetch and display trending news
+        const fetchTrendingNews = async () => {
+            try {
+                const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`);
+                const trendingNewsData = await response.json();
+
+                // Display news items
+                trendingNewsData.news.forEach(news => {
+                    const newsItem = document.createElement("div");
+                    newsItem.classList.add("news-item");
+                    newsItem.innerHTML = `<h3><a href="${news.url}" target="_blank">${news.title}</a></h3><p style="display:none;">${news.description}</p>`;
+                    newsContainer.appendChild(newsItem);
+                });
+            } catch (error) {
+                console.error("Error fetching trending news:", error);
+            }
+        };
+
+        // Call the function to fetch and display data
+        fetchTrendingNews();
+        
+    </script>
+</body>
+
+</html>

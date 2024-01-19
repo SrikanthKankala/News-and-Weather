@@ -1,0 +1,317 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .description-container {
+            margin-top: 20px;
+        }
+
+        .description-item {
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>News Description</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Description</h2>
+        <div class="description-container" id="descriptionContainer"></div>
+    </div>
+
+    <script>
+        const descriptionContainer = document.getElementById("descriptionContainer");
+
+        // Function to display news description
+        const showDescription = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const description = urlParams.get('desc');
+
+            if (description) {
+                const descriptionItem = document.createElement("div");
+                descriptionItem.classList.add("description-item");
+                descriptionItem.innerHTML = `<p>${decodeURIComponent(description)}</p>`;
+                descriptionContainer.appendChild(descriptionItem);
+            } else {
+                // Handle case when no description is provided
+                console.error("No description provided.");
+            }
+        };
+
+        // Call the function to display description
+        showDescription();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .description-container {
+            margin-top: 20px;
+        }
+
+        .description-item {
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>News Description</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Description</h2>
+        <div class="description-container" id="descriptionContainer"></div>
+    </div>
+
+    <script>
+        const descriptionContainer = document.getElementById("descriptionContainer");
+
+        // Function to display news description
+        const showDescription = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const description = urlParams.get('desc');
+
+            if (title && description) {
+                const descriptionItem = document.createElement("div");
+                descriptionItem.classList.add("description-item");
+                descriptionItem.innerHTML = `<h3>${decodeURIComponent(title)}</h3><p>${decodeURIComponent(description)}</p>`;
+                descriptionContainer.appendChild(descriptionItem);
+            } else {
+                // Handle case when no title or description is provided
+                console.error("No title or description provided.");
+            }
+        };
+
+        // Call the function to display description
+        showDescription();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .description-container {
+            margin-top: 20px;
+        }
+
+        .description-item {
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+    <title>News Description</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Description</h2>
+        <div class="description-container" id="descriptionContainer"></div>
+    </div>
+
+    <script>
+        const descriptionContainer = document.getElementById("descriptionContainer");
+
+        // Function to display news description
+        const showDescription = () => {
+            // Retrieve selected news from localStorage
+            const selectedNews = JSON.parse(localStorage.getItem('selectedNews'));
+
+            if (selectedNews) {
+                const descriptionItem = document.createElement("div");
+                descriptionItem.classList.add("description-item");
+                descriptionItem.innerHTML = `<h3>${decodeURIComponent(selectedNews.title)}</h3><p>${decodeURIComponent(selectedNews.description)}</p>`;
+                descriptionContainer.appendChild(descriptionItem);
+            } else {
+                // Handle case when no selected news is found
+                console.error("No selected news found.");
+            }
+        };
+
+        // Call the function to display description
+        showDescription();
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .description-container {
+            margin-top: 20px;
+        }
+
+        .description-item {
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+    <title>News Description</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Description</h2>
+        <div class="description-container" id="descriptionContainer"></div>
+    </div>
+
+    <script>
+        const descriptionContainer = document.getElementById("descriptionContainer");
+
+        // Function to display news description
+        const showDescription = () => {
+            // Retrieve selected news from localStorage
+            const selectedNews = JSON.parse(localStorage.getItem('selectedNews'));
+
+            if (selectedNews) {
+                const descriptionItem = document.createElement("div");
+                descriptionItem.classList.add("description-item");
+                descriptionItem.innerHTML = `<h3>${decodeURIComponent(selectedNews.title)}</h3><p>${decodeURIComponent(selectedNews.description)}</p><img src="${selectedNews.image}" alt="${selectedNews.title}"/>`;
+                descriptionContainer.appendChild(descriptionItem);
+            } else {
+                // Handle case when no selected news is found
+                console.error("No selected news found.");
+            }
+        };
+
+        // Call the function to display description
+        showDescription();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+}
+
+.heading-container {
+  background-color: #cb202d;
+  color: #ffffff;
+  font-size: 2.5em;
+  padding: 0.8em 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 50px 0 rgba(2, 0, 31, 0.3);
+  z-index: 1;
+}
+
+.heading-container h4 {
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: 5px;
+}
+
+.options-container {
+  margin: 10em 0 2em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  text-align: center;
+}
+
+.option {
+  background-color: #d5d5d5;
+  border: none;
+  cursor: pointer;
+  padding: 0.8em 1.5em;
+  border-radius: 0.5em;
+  border: none;
+  text-transform: capitalize;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1em;
+}
+
+.news-card {
+  display: grid;
+  position: relative;
+  grid-template-rows: auto 1fr;
+  box-shadow: 0 0 15px rgba(85, 85, 85, 0.2);
+  margin: 1em 0;
+  border-radius: 15px;
+}
+
+.news-card img {
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+}
+
+.news-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+  font-size: 15px;
+}
+
+.news-title {
+  font-weight: 600;
+  color: #0b0028;
+}
+
+.news-description {
+  color: #6f6f6f;
+  text-align: justify;
+  margin: 0.8em 0 1em 0;
+}
+
+.view-button {
+  position: relative;
+  text-decoration: none;
+  background-color: #cb202d;
+  color: #ffffff;
+  width: 7em;
+  text-align: center;
+  padding: 0.3em 0.2em;
+  border-radius: 5px;
+}
+
+.active {
+  background-color: #cb202d;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div class="heading-container">
+      <h4>Trending News</h4>
+    </div>
+    <div class="options-container"></div>
+    <div class="container"></div>
+    <!-- API Key -->
+    <script>
+        const apiKey = 'YMWKJobf_j-zViPZqN36MFh1AgrOIlEFvq_5ChhLLdgwdKAl';
+        const container = document.querySelector(".container");
+        const optionsContainer = document.querySelector(".options-container");
+
+        const categories = [
+          'general',
+          'business',
+          'technology',
+          'entertainment',
+          'health',
+          'science',
+          'sports'
+        ];
+
+        let requestURL;
+
+        const generateUI = (articles) => {
+          container.innerHTML = "";
+          for (const item of articles) {
+            const card = document.createElement("div");
+            card.classList.add("news-card");
+            card.innerHTML = `
+              <div class="news-image-container">
+                <img src="${item.image}" alt="" />
+              </div>
+              <div class="news-content">
+                <div class="news-title">${item.title}</div>
+                <div class="news-description">${item.description}</div>
+                <a href="${item.url}" target="_blank" class="view-button">Read More</a>
+              </div>`;
+            container.appendChild(card);
+          }
+        };
+
+        const getNews = async (category) => {
+          requestURL = `https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}&category=${category}`;
+          const response = await fetch(requestURL);
+          const data = await response.json();
+          generateUI(data.news);
+        };
+
+        const selectCategory = (e, category) => {
+          const options = document.querySelectorAll(".option");
+          options.forEach((element) => {
+            element.classList.remove("active");
+          });
+          e.target.classList.add("active");
+          getNews(category);
+        };
+
+        const createOptions = () => {
+          for (const category of categories) {
+            optionsContainer.innerHTML += `
+              <button class="option ${category === 'general' ? 'active' : ''}" onclick="selectCategory(event, '${category}')">
+                ${category}
+              </button>`;
+          }
+        };
+
+        const init = () => {
+          optionsContainer.innerHTML = "";
+          createOptions();
+          getNews('general');
+        };
+
+        window.onload = init;
+    </script>
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
